@@ -1,17 +1,20 @@
 class House
   attr_reader :square_feet, :num_bedrooms, :num_baths, :cost
 
-  def initialize(address, square_feet, num_bedrooms = 3, num_baths = 2, cost = 320_000, down_payment = 0.20, sold = false, has_tenants = false)
-    @address = address
-    @square_feet = square_feet
-    @num_bedrooms = num_bedrooms
-    @num_baths = num_baths
-    @cost = cost
-    @down_payment = down_payment
-    @sold = sold
-    @short_sale = short_sale
-    @has_tenants = has_tenants
+  def initialize(house_detail = {})
+    @address = house_detail[:address]
+    @square_feet = house_detail[:square_feet]
+    @num_bedrooms = house_detail[:num_bedrooms] || 3
+    @num_baths = house_detail [:num_baths] || 2
+    @cost = house_detail [:cost] || 320_000
+    @down_payment = house_detail [:down_payment] || 0.20
+    @sold = house_detail [:sold] || false
+    @short_sale = house_detail [:short_sale] 
+    @has_tenants = house_detail [:has_tenants] || false
   end
+
+
+    
 
   def obscure_address
     @address.sub(/\A\d*/, '****')
@@ -29,3 +32,4 @@ class House
     "#{obscure_address} : #{square_feet} sq. ft., #{num_bedrooms} bed, #{num_baths} bath. $#{cost}"
   end
 end
+
